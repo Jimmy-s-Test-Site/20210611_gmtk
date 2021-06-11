@@ -8,16 +8,15 @@ extends RigidBody2D
 #	Grapple: LMB
 #	Ungrapple: RMB
 
-signal consumed_FEL(new_total)
-
 enum {
-	SKATE,	
+	SKATE,
 	ATTACH
 }
 
 # variables
 
 export var skate_max_speed := 100.0
+export var skate_speed := 90.0
 
 export var grapple_max_speed := 20.0
 export var grapple_max_distance := 200.0
@@ -50,7 +49,7 @@ func _physics_process(delta: float) -> void:
 func input_manager() -> void:
 	self.input = Vector2(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-		Input.get_action_strength("accelerate")   - Input.get_action_strength("decelerate")
+		Input.get_action_strength("decelerate") - Input.get_action_strength("accelerate")
 	).normalized()
 
 func enter_state() -> void:
@@ -65,7 +64,10 @@ func enter_state() -> void:
 func do_state() -> void:
 	match self._state:
 		SKATE:
-			pass
+			self.apply_central_impulse(self.input * self.skate_speed)
+			
+			if self.linear_velocity.length() > self.skate_max_speed:
+				self.linear_velocity = self.linear_velocity.normalized() * self.skate_max_speed
 		ATTACH:
 			var propel_direction := self.get_local_mouse_position().normalized()
 			self.apply_central_impulse(propel_direction.rotated(self.rotation).rotated(PI) * self.propel_speed)
@@ -76,11 +78,10 @@ func do_state() -> void:
 			$FireExtinguisher.process_material.direction = Vector3(propel_direction.x, propel_direction.y, 0)
 
 func leave_state(state: Physics2DDirectBodyState) -> void:
-	var is_touching_surface := state.get_contact_count() > 0
-	
 	match self._state:
 		SKATE:
-			if self.input_propel and self.FEL_amount > 0:
+			# TODO: implement later :D
+			if false:
 				self.change_state(ATTACH)
 		ATTACH:
 			self.change_state(SKATE)
