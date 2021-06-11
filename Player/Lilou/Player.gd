@@ -8,6 +8,8 @@ extends RigidBody2D
 #	Grapple: LMB
 #	Ungrapple: RMB
 
+var car_clicked : RigidBody2D
+
 enum {
 	SKATE,
 	ATTACH
@@ -16,7 +18,7 @@ enum {
 # variables
 
 export var skate_max_speed := 100.0
-export var skate_speed := 90.0
+export var skate_speed := 200.0
 
 export var grapple_max_speed := 20.0
 export var grapple_max_distance := 200.0
@@ -81,10 +83,13 @@ func leave_state(state: Physics2DDirectBodyState) -> void:
 	match self._state:
 		SKATE:
 			# TODO: implement later :D
-			if false:
+			if car_clicked != null:
 				self.change_state(ATTACH)
 		ATTACH:
-			self.change_state(SKATE)
+			if Input.is_action_just_pressed("ungrapple"):
+				self.change_state(SKATE)
+			elif car_clicked != null:
+				self.change_state(ATTACH)
 
 func change_state(target_state : int) -> void:
 	if not target_state in self._transitions[self._state]:
