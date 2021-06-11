@@ -1,5 +1,11 @@
 extends Node2D
 
+# Player Movement 
+# 1 Skating
+#	WASD
+# 2 Grapple
+#	LMB, RMB
+
 
 # Declare member variables here. Examples:
 # var a = 2
