@@ -17,11 +17,12 @@ enum {
 
 # variables
 
-export var skate_max_speed := 100.0
-export var skate_speed := 200.0
+export var skate_friction = 0.10
+export var skate_acceleration = 3000.0
+export var skate_speed_max := 400.0
 
-export var grapple_max_speed := 20.0
-export var grapple_max_distance := 200.0
+export var grapple_speed_max := 20.0
+export var grapple_distance_max := 200.0
 
 onready var _transitions := {
 	SKATE: [ATTACH],
@@ -40,10 +41,10 @@ func _process(delta: float) -> void:
 	self.input_manager()
 
 func _integrate_forces(state: Physics2DDirectBodyState) -> void:
-	self.do_state()
+	self.do_state(state)
 	self.leave_state(state)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(delta: float) -> void:	
 	if _state == SKATE:
 		pass
 
@@ -63,21 +64,17 @@ func enter_state() -> void:
 		_:
 			return
 
-func do_state() -> void:
+func do_state(state) -> void:
 	match self._state:
 		SKATE:
-			#if self.linear_velocity.length() < self.skate_max_speed and is_equal_approx(self.linear_velocity.length(), self.skate_max_speed):
-			#	pass
+			# friction
+			state.linear_velocity = lerp(state.linear_velocity, Vector2.ZERO, skate_friction)
 			
-			print(self.input)
+			# acceleration
+			state.linear_velocity += self.input * skate_acceleration * state.step
 			
-			if self.linear_velocity.length() <= self.skate_max_speed:
-				self.apply_central_impulse(self.input * self.skate_speed)
-			
-			#self.apply_central_impulse(self.input * self.skate_speed)
-			#
-			#if self.linear_velocity.length() > self.skate_max_speed:
-			#	self.linear_velocity = self.linear_velocity.normalized() * self.skate_max_speed
+			# clamp
+			state.linear_velocity = state.linear_velocity.clamped(skate_speed_max)
 		ATTACH:
 			pass
 
