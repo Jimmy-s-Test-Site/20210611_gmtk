@@ -57,27 +57,29 @@ func input_manager() -> void:
 func enter_state() -> void:
 	match _state:
 		SKATE:
-			pass
+			$DampedSpringJoint2D.node_b = null
 		ATTACH:
-			pass
+			$DampedSpringJoint2D.node_b = self.car_clicked
 		_:
 			return
 
 func do_state() -> void:
 	match self._state:
 		SKATE:
-			self.apply_central_impulse(self.input * self.skate_speed)
+			#if self.linear_velocity.length() < self.skate_max_speed and is_equal_approx(self.linear_velocity.length(), self.skate_max_speed):
+			#	pass
 			
-			if self.linear_velocity.length() > self.skate_max_speed:
-				self.linear_velocity = self.linear_velocity.normalized() * self.skate_max_speed
+			print(self.input)
+			
+			if self.linear_velocity.length() <= self.skate_max_speed:
+				self.apply_central_impulse(self.input * self.skate_speed)
+			
+			#self.apply_central_impulse(self.input * self.skate_speed)
+			#
+			#if self.linear_velocity.length() > self.skate_max_speed:
+			#	self.linear_velocity = self.linear_velocity.normalized() * self.skate_max_speed
 		ATTACH:
-			var propel_direction := self.get_local_mouse_position().normalized()
-			self.apply_central_impulse(propel_direction.rotated(self.rotation).rotated(PI) * self.propel_speed)
-			
-			if self.linear_velocity.length() > self.max_propel_speed:
-				self.linear_velocity = self.linear_velocity.normalized() * self.max_propel_speed
-			
-			$FireExtinguisher.process_material.direction = Vector3(propel_direction.x, propel_direction.y, 0)
+			pass
 
 func leave_state(state: Physics2DDirectBodyState) -> void:
 	match self._state:
