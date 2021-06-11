@@ -4,3 +4,6 @@
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
+levels = [ null, null ]
+
+[node name="currentLevel" type="Node2D" parent="."]
