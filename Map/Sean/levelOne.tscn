@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Player/Lilou/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Cars/Abdullah/Car.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Map/mapTexture/unknown.png" type="Texture" id=3]
+[ext_resource path="res://Cars/Abdullah/Target.tscn" type="PackedScene" id=4]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( -48.6195, 159.061, 45.4127, 119.51, -21.0932, 277.216, -53.2157, 172.849, 147.805, 138.922, 166.448, 216.05, 140.261, 203.976, -46.0217, 472.517, -5.94577, 542.745, -26.3021, 543.413, -29.5076, 532.06, -60.1798, 473.696, 103.5, 188.542, 115.567, 152.623, -46.75, 313.25, -40.5664, 403.327, -30.057, 297.209, -47.3674, 298.013, 32.4348, -434.114, 30.6137, -531.726, 46.1703, -529.624, 46.2078, -435.703, 18.5, -224.5, 7.41409, -232.242, -67.7114, 179.213, -22.4962, 290.967, -82.3885, -80.2145, -70.4411, -79.9913, -76.7316, 21.6089, -64.6079, 20.5216, -68.4758, 141.109, 104.903, 297.421, 168.23, 355.921, 51.5862, 318.467, 67.5813, 282.267, 51.6968, 84.8614, 128.45, 69.5107, -54.6299, 148.808, -165.827, 141.11, -80.3948, 146.142, -88.6057, 157.531, -164.966, 232.086, -82.2071, 173.91 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 6 ), PoolIntArray( 7, 8, 9, 10 ), PoolIntArray( 7, 10, 11 ), PoolIntArray( 4, 6, 12, 13 ), PoolIntArray( 7, 11, 14, 15 ), PoolIntArray( 16, 15, 14, 17 ), PoolIntArray( 18, 19, 20, 21 ), PoolIntArray( 18, 21, 22, 23 ), PoolIntArray( 16, 17, 24, 3, 2, 25 ), PoolIntArray( 26, 23, 22, 27 ), PoolIntArray( 28, 26, 27, 29, 30 ), PoolIntArray( 31, 6, 5, 32 ), PoolIntArray( 33, 34, 31, 32 ), PoolIntArray( 35, 36, 4, 13, 1 ), PoolIntArray( 1, 0, 37, 29, 35 ), PoolIntArray( 29, 37, 30 ), PoolIntArray( 38, 28, 30, 39 ), PoolIntArray( 38, 39, 40, 41 ), PoolIntArray( 41, 40, 42, 17 ), PoolIntArray( 17, 42, 24 ), PoolIntArray( 33, 32, 16 ), PoolIntArray( 16, 25, 33 ) ]
+outlines = [ PoolVector2Array( -165.827, 141.11, -76.7316, 21.6089, -82.3885, -80.2145, 7.41409, -232.242, 32.4348, -434.114, 30.6137, -531.726, 46.1703, -529.624, 46.2078, -435.703, 18.5, -224.5, -70.4411, -79.9913, -64.6079, 20.5216, 51.6968, 84.8614, 128.45, 69.5107, 147.805, 138.922, 166.448, 216.05, 168.23, 355.921, -30.057, 297.209, -40.5664, 403.327, -46.0217, 472.517, -5.94577, 542.745, -26.3021, 543.413, -29.5076, 532.06, -60.1798, 473.696, -46.75, 313.25, -47.3674, 298.013, -164.966, 232.086 ), PoolVector2Array( -88.6057, 157.531, -80.3948, 146.142, -68.4758, 141.109, -54.6299, 148.808, -48.6195, 159.061, -53.2157, 172.849, -67.7114, 179.213, -82.2071, 173.91 ), PoolVector2Array( 45.4127, 119.51, 115.567, 152.623, 103.5, 188.542, 140.261, 203.976, 104.903, 297.421, 67.5813, 282.267, 51.5862, 318.467, -22.4962, 290.967, -21.0932, 277.216 ) ]
 
 [node name="levelone" type="Node2D"]
 
@@ -51,10 +57,22 @@ polygon = PoolVector2Array( 14.7375, -292.74, 27.1092, -292.97, 27.3383, -297.32
 [node name="CollisionPolygon2D12" type="CollisionPolygon2D" parent="container/StaticBody2D"]
 polygon = PoolVector2Array( -21.3552, 292.556, 1.01131, 292.375, 0.25346, 305.129, -21.4549, 305.048 )
 
-[node name="Car" parent="." instance=ExtResource( 2 )]
-position = Vector2( 24.0687, -320.242 )
-scale = Vector2( 0.062, 0.062 )
-
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 46.5131, -317.238 )
+position = Vector2( -22.127, 149.597 )
 scale = Vector2( 0.05, 0.05 )
+
+[node name="GPS" type="Navigation2D" parent="."]
+
+[node name="Roads" type="NavigationPolygonInstance" parent="GPS"]
+navpoly = SubResource( 1 )
+
+[node name="Car" parent="GPS" instance=ExtResource( 2 )]
+position = Vector2( 24.0687, -320.242 )
+target = NodePath("../../Target Container/Target")
+car_speed = 60
+
+[node name="Target Container" type="Node2D" parent="."]
+visible = false
+
+[node name="Target" parent="Target Container" instance=ExtResource( 4 )]
+position = Vector2( -25.576, 530.479 )
