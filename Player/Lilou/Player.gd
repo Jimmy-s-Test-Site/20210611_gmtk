@@ -48,7 +48,6 @@ func _physics_process(delta: float) -> void:
 	if _state == SKATE:
 		pass
 
-
 func input_manager() -> void:
 	self.input = Vector2(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
@@ -68,7 +67,7 @@ func do_state(state) -> void:
 	match self._state:
 		SKATE:
 			# friction
-			state.linear_velocity = lerp(state.linear_velocity, Vector2.ZERO, skate_friction)
+			state.linear_velocity = lerp(state.linear_velocity, Vector2.ZERO, (skate_friction * state.step))
 			
 			# acceleration
 			state.linear_velocity += self.input * skate_acceleration * state.step
