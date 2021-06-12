@@ -6,9 +6,9 @@
 [sub_resource type="CircleShape2D" id=1]
 
 [sub_resource type="NavigationPolygon" id=2]
-vertices = PoolVector2Array( 723.244, 3.46521, 1753.12, 5.24701, 1754.9, 609.276, 728.589, 618.185 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
-outlines = [ PoolVector2Array( 723.244, 3.46521, 1753.12, 5.24701, 1754.9, 609.276, 728.589, 618.185 ) ]
+vertices = PoolVector2Array( 1506.84, 480.645, 1754.9, 609.276, 728.589, 618.185, 1199.83, 471.302, 723.244, 3.46521, 1181.14, 215.012, 1753.12, 5.24701, 1588.27, 185.646, 1753.79, 208.338 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 3, 2, 4, 5 ), PoolIntArray( 5, 4, 6, 7 ), PoolIntArray( 7, 6, 8 ) ]
+outlines = [ PoolVector2Array( 723.244, 3.46521, 1753.12, 5.24701, 1753.79, 208.338, 1588.27, 185.646, 1181.14, 215.012, 1199.83, 471.302, 1506.84, 480.645, 1754.9, 609.276, 728.589, 618.185 ) ]
 
 [node name="Node2D" type="Node2D"]
 position = Vector2( -729.011, -10.4863 )
@@ -32,4 +32,4 @@ navpoly = SubResource( 2 )
 [node name="Car" parent="Navigation2D" instance=ExtResource( 1 )]
 position = Vector2( 1245.58, 594.195 )
 target = NodePath("../../Area2D")
-car_speed = 400
+car_speed = 200
