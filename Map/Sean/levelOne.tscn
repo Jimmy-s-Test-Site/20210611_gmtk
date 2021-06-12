@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Player/Lilou/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Cars/Abdullah/Car.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Map/mapTexture/unknown.png" type="Texture" id=3]
+
+[node name="levelone" type="Node2D"]
+
+[node name="map" type="Sprite" parent="."]
+scale = Vector2( 1.83516, 1.83516 )
+texture = ExtResource( 3 )
+
+[node name="container" type="Node2D" parent="."]
+scale = Vector2( 1.83516, 1.83516 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="container"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="container/StaticBody2D"]
+polygon = PoolVector2Array( -32.3399, 6.6079, -34.7864, -44.77, 12.9216, -121.225, 26.9893, -239.883, 26.9893, -294.319, 89.9883, -293.096, 91.2116, 23.1222, 63.6878, 37.8016, 28.2126, 42.6947 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="container/StaticBody2D"]
+polygon = PoolVector2Array( 14.7565, -293.096, 15.9798, -236.214, 0.688754, -125.507, -48.2425, -46.6049, -43.9611, 10.8894, -92.2807, 75.1117, -90.4458, -295.543 )
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="container/StaticBody2D"]
+polygon = PoolVector2Array( -14.4401, 165.731, 90.4551, 196.791, 90.7275, 292.695, -2.4521, 292.695, -22.8862, 255.641 )
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="container/StaticBody2D"]
+polygon = PoolVector2Array( -90.7275, 128.95, -27.2455, 164.369, -35.1467, 256.186, -16.8922, 292.968, -90.4551, 292.968 )
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="container/StaticBody2D"]
+polygon = PoolVector2Array( -44.7097, 87.3948, -42.7754, 82.2814, -36.8109, 79.6886, -31.6048, 82.8263, -29.4251, 87.4581, -31.8772, 93.7246, -37.1962, 96.0642, -42.7832, 93.1744 )
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="container/StaticBody2D"]
+polygon = PoolVector2Array( -10.642, 151.603, 24.8465, 66.7389, 62.6495, 83.1973, 54.9346, 102.999, 75.2505, 111.228, 56.2204, 160.346, 36.1617, 152.374, 27.9323, 172.433, -11.6708, 157.26 )
+
+[node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="container/StaticBody2D"]
+polygon = PoolVector2Array( -91.3915, 128.201, -91.1343, 73.1679, -103.221, 89.3692 )
+
+[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="container/StaticBody2D"]
+polygon = PoolVector2Array( 76.6271, 46.2465, 91.9019, 112.437, 91.1745, 36.0634 )
+
+[node name="CollisionPolygon2D9" type="CollisionPolygon2D" parent="container/StaticBody2D"]
+polygon = PoolVector2Array( 91.1745, 22.9707, 91.9019, 36.427, 96.9934, 36.427, 96.6298, 22.2434 )
+
+[node name="CollisionPolygon2D10" type="CollisionPolygon2D" parent="container/StaticBody2D"]
+polygon = PoolVector2Array( 91.0863, 195.791, 92.2423, 110.252, 108.04, 115.646 )
+
+[node name="CollisionPolygon2D11" type="CollisionPolygon2D" parent="container/StaticBody2D"]
+polygon = PoolVector2Array( 14.7375, -292.74, 27.1092, -292.97, 27.3383, -297.323, 14.9666, -297.093 )
+
+[node name="CollisionPolygon2D12" type="CollisionPolygon2D" parent="container/StaticBody2D"]
+polygon = PoolVector2Array( -21.3552, 292.556, 1.01131, 292.375, 0.25346, 305.129, -21.4549, 305.048 )
+
+[node name="Car" parent="." instance=ExtResource( 2 )]
+position = Vector2( 24.0687, -320.242 )
+scale = Vector2( 0.062, 0.062 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 46.5131, -317.238 )
+scale = Vector2( 0.05, 0.05 )

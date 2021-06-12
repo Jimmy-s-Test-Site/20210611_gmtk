@@ -1,7 +1,7 @@
 extends Node2D
 
 signal level_complete
-var player 
+var player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,4 +16,3 @@ func car_Clicked(car):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-
