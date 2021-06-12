@@ -1,25 +1,35 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Cars/Abdullah/Car.tscn" type="PackedScene" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=1]
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 154.09, 62.583 )
+[sub_resource type="NavigationPolygon" id=2]
+vertices = PoolVector2Array( 76.8607, 346.733, 88.7518, 51.809, 493.083, 361.003, 367.027, 477.546, 994.927, 570.303, 864.116, 370.517, 1256.55, 468.032, 1639.48, 698.738, 1442.07, 313.435, 1817.86, 130.297, 1002.06, 58.9442, 833.197, 284.894, 780.872, 113.648 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 3, 2, 5, 6 ), PoolIntArray( 7, 4, 6 ), PoolIntArray( 7, 6, 8, 9 ), PoolIntArray( 10, 9, 8, 11, 12 ) ]
+outlines = [ PoolVector2Array( 88.7518, 51.809, 493.083, 361.003, 864.116, 370.517, 1256.55, 468.032, 1442.07, 313.435, 833.197, 284.894, 780.872, 113.648, 1002.06, 58.9442, 1817.86, 130.297, 1639.48, 698.738, 994.927, 570.303, 367.027, 477.546, 76.8607, 346.733 ) ]
 
 [node name="Node2D" type="Node2D"]
+position = Vector2( -729.011, -10.4863 )
 
-[node name="Car" parent="." instance=ExtResource( 1 )]
-position = Vector2( 200.594, 76.8858 )
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 908.576, 163.248 )
 
-[node name="Target" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Target"]
-position = Vector2( 508.378, 85.6746 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Sprite" type="Sprite" parent="Area2D"]
+modulate = Color( 0.776471, 0.0352941, 0.0352941, 1 )
+texture = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 299.004, 252.285 )
-shape = SubResource( 2 )
+[node name="Navigation2D" type="Navigation2D" parent="."]
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
+position = Vector2( 7.13513, 2.37842 )
+navpoly = SubResource( 2 )
+
+[node name="Car" parent="Navigation2D" instance=ExtResource( 1 )]
+position = Vector2( 902.171, 456.14 )
+target = NodePath("../../Area2D")
+car_speed = 400
