@@ -3,7 +3,7 @@
 [ext_resource path="res://Cars/Abdullah/Car.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Cars/Abdullah/Target.tscn" type="PackedScene" id=2]
 
-[sub_resource type="NavigationPolygon" id=2]
+[sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 1506.84, 480.645, 1754.9, 609.276, 728.589, 618.185, 1199.83, 471.302, 723.244, 3.46521, 1181.14, 215.012, 1753.12, 5.24701, 1588.27, 185.646, 1753.79, 208.338 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 3, 2, 4, 5 ), PoolIntArray( 5, 4, 6, 7 ), PoolIntArray( 7, 6, 8 ) ]
 outlines = [ PoolVector2Array( 723.244, 3.46521, 1753.12, 5.24701, 1753.79, 208.338, 1588.27, 185.646, 1181.14, 215.012, 1199.83, 471.302, 1506.84, 480.645, 1754.9, 609.276, 728.589, 618.185 ) ]
@@ -15,7 +15,7 @@ position = Vector2( -729.011, -10.4863 )
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
 position = Vector2( -30.5155, 29.1784 )
-navpoly = SubResource( 2 )
+navpoly = SubResource( 1 )
 
 [node name="Car" parent="Navigation2D" instance=ExtResource( 1 )]
 position = Vector2( 1345.69, 570.168 )
