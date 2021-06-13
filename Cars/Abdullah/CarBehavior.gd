@@ -26,7 +26,6 @@ func move_along_path(distance):
 			self.position = last_point.linear_interpolate(path[0], distance / distance_between_points)
 			var there = self.position
 			#dumb dumb time start
-			print ( (here-there) )
 			self.rotation = here.angle_to_point(there) - PI/2
 			#dumb dumb time begin
 			return
@@ -89,8 +88,8 @@ func _update_navigation_path(start_position, end_position):
 #	state.linear_velocity = -state.linear_velocity
 #	state.add_central_force(direction)
 #	state.linear_velocity = state.linear_velocity.clamped(.1)
-
-
+func get_target():
+	return self.get_node(self.target)
 
 func _on_Car_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
@@ -101,3 +100,10 @@ func _on_Timer_timeout():
 	#if self.hasCollidedwithwall for longer than two seconds:
 		#delete self
 	$Timer.start(2)
+
+
+
+func _on_Car_body_shape_entered(body_id, body, body_shape, local_shape):
+	print(body.get_parent().name)
+	if body.get_parent().name == "Target":
+		self.queue_free()
