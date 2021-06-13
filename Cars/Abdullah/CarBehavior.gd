@@ -93,7 +93,7 @@ func get_target():
 
 func _on_Car_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
-		emit_signal("clicked_on")
+		self.emit_signal("clicked_on", self)
 
 
 func _on_Timer_timeout():

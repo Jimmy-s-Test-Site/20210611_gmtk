@@ -1,18 +1,29 @@
 extends Node2D
 
 signal level_complete
-var player
+
+export(NodePath) var player
+export(NodePath) var car_container
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	for car in $cars.get_children() :
-		car.connect("clicked_on", self, "car_Clicked",[car])
-		pass
-	pass 	# Replace with function body.
+func _ready() -> void:
+	for car in self.get_node(self.car_container).get_children():
+		car.get_node("GPS/Car").connect("clicked_on", self, "on_car_clicked")
 
-func car_Clicked(car):
-	player.car_clicked = car
-	pass
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("ungrapple"):
+		for spring in $SpringContainer.get_children():
+			spring.queue_free()
+
+func on_car_clicked(car : RigidBody2D) -> void:
+	self.get_node(self.player).car_clicked = car
+	
+	for spring in $SpringContainer.get_children():
+		spring.queue_free()
+	
+	var node := DampedSpringJoint2D.new()
+	node.node_a = self.get_node(self.player).get_path()
+	node.node_b = car.get_path()
+	node.length = 8
+	node.rest_length = 5
+	$SpringContainer.add_child(node)

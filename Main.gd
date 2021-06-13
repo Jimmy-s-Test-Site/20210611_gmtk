@@ -13,11 +13,14 @@ func load_next_level():
 
 func load_level(idx : int):
 	if $currentLevel.get_child_count() == 1:
+		$currentLevel.get_child(0).disconnect("level_complete", self, "on_level_complete")
 		$currentLevel.get_child(0).queue_free()
 	
 	var level : Node = self.levels[self.curr_level].instance()
 	
+	level.connect("level_complete", self, "on_level_complete")
+	
 	$currentLevel.add_child(level)
 
-func onLevelComplete():
+func on_level_complete():
 	pass

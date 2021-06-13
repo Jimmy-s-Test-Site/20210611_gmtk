@@ -57,38 +57,45 @@ func input_manager() -> void:
 func enter_state() -> void:
 	match _state:
 		STATE.SKATE:
-			$DampedSpringJoint2D.node_b = null
+			pass
+			#for spring in $SpringContainer.get_children():
+			#	spring.queue_free()
 		STATE.ATTACH:
-			$DampedSpringJoint2D.node_b = self.car_clicked
+			pass
+			#var node := DampedSpringJoint2D.new()
+			#node.node_a = self.get_path()
+			#node.node_b = self.car_clicked.get_path()
+			#node.length = 8
+			#node.rest_length = 5
+			#$SpringContainer.add_child(node)
 		_:
 			return
 
 func do_state(state) -> void:
-	# target direction
-	var target_direction := self.input.rotated(self.rotation)
-	# friction
-	state.linear_velocity = lerp(state.linear_velocity, Vector2.ZERO, self.skate_friction * state.step)
 	
 	match self._state:
 		STATE.SKATE:
+			# target direction
+			var target_direction := self.input.rotated(self.rotation)
+			# friction
+			state.linear_velocity = lerp(state.linear_velocity, Vector2.ZERO, self.skate_friction * state.step)
 			# acceleration
 			state.linear_velocity += target_direction * self.skate_acceleration * state.step
+			# clamp
+			state.linear_velocity = state.linear_velocity.clamped(self.skate_speed_max)
 		STATE.ATTACH:
 			pass
 	
-	# clamp
-	state.linear_velocity = state.linear_velocity.clamped(self.skate_speed_max)
 
 func leave_state(state: Physics2DDirectBodyState) -> void:
 	match self._state:
 		STATE.SKATE:
-			# TODO: implement later :D
-			if car_clicked != null:
+			if self.car_clicked != null:
 				self.change_state(STATE.ATTACH)
 		STATE.ATTACH:
 			if Input.is_action_just_pressed("ungrapple"):
 				self.change_state(STATE.SKATE)
-			elif car_clicked != null:
+			elif self.car_clicked != null:
 				self.change_state(STATE.ATTACH)
 
 func change_state(target_state : int) -> void:
