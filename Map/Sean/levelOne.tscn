@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Player/Lilou/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Cars/Abdullah/Car.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Map/mapTexture/unknown.png" type="Texture" id=3]
+[ext_resource path="res://Map/mapTexture/map1.png" type="Texture" id=3]
 [ext_resource path="res://Cars/Abdullah/Target.tscn" type="PackedScene" id=4]
 
 [sub_resource type="NavigationPolygon" id=1]

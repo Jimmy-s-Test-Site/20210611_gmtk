@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Capture.PNG-834eb6c237a03351e66b4892d4802dcb.stex"
+path="res://.import/car_blue_2.png-55b034dc06ab5817e0bc48274d17fb07.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Map/mapTexture/Capture.PNG"
-dest_files=[ "res://.import/Capture.PNG-834eb6c237a03351e66b4892d4802dcb.stex" ]
+source_file="res://Cars/Car Images/car_blue_2.png"
+dest_files=[ "res://.import/car_blue_2.png-55b034dc06ab5817e0bc48274d17fb07.stex" ]
 
 [params]
 
