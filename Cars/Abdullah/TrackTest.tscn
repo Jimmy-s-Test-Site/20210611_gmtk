@@ -18,7 +18,7 @@ position = Vector2( -30.5155, 29.1784 )
 navpoly = SubResource( 2 )
 
 [node name="Car" parent="Navigation2D" instance=ExtResource( 1 )]
-position = Vector2( 1513.88, 151.028 )
+position = Vector2( 1345.69, 570.168 )
 target = NodePath("../../Target")
 car_speed = 200
 
